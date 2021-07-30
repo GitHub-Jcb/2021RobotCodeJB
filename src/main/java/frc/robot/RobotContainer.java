@@ -13,8 +13,11 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.commands.DriveWithJoystick;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Shooter;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.SteelTalonsController;
+import frc.robot.subsystems.Transport;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Elevator;
 import edu.wpi.first.wpilibj.SpeedController;
@@ -23,6 +26,12 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.DriveWithJoystick;
 import edu.wpi.first.wpilibj.Encoder;
 import frc.robot.commands.MoveElevator;
+import frc.robot.commands.Shoot;
+import frc.robot.commands.MoveIntake;
+import frc.robot.commands.MoveTransport;
+import frc.robot.subsystems.Pulley;
+import frc.robot.commands.MovePulley;
+import frc.robot.commands.ShootAuto;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -49,6 +58,22 @@ public class RobotContainer {
   private Button elevButtonDown;
   private Elevator elevator;
 
+  private SpeedController shootLeft, shootRight;
+  private Shooter shooter;
+  private Button shootButton;
+
+  private SpeedController inSC;
+  private Intake intake;
+  private Button inButton;
+
+  private SpeedController traSC;
+  private Transport transport;
+  private Button traButton;
+
+  private SpeedController pullSC;
+  private Pulley pulley;
+  private Button mPulleyButton, sAutoButton;
+
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     
@@ -73,6 +98,19 @@ public class RobotContainer {
     
 
     elevator = new Elevator(elevLeft, elevRight, elevSwitch, elevEncOne, elevEncTwo);
+
+    shootLeft = new SteelTalonsController(6, false, 1);
+    shootRight = new SteelTalonsController(7, false, 1);
+    shooter = new Shooter(shootLeft, shootRight);
+
+    inSC = new SteelTalonsController(8, false, 1);
+    intake = new Intake(inSC);
+
+    traSC = new SteelTalonsController(9, false, 1);
+    transport = new Transport(traSC);
+
+    pullSC = new SteelTalonsController(10, false, 1);
+    pulley = new Pulley(pullSC);
     // Configure the button bindings
     configureButtonBindings();
 
@@ -92,6 +130,22 @@ public class RobotContainer {
 
     elevButtonUp.whileHeld(new MoveElevator(Constants.ELEVATOR_SPEED_UP));
     elevButtonDown.whileHeld(new MoveElevator(Constants.ELEVATOR_SPEED_DOWN));
+
+    shootButton = new JoystickButton(joystick, 2);
+    shootButton.whileHeld(new Shoot(Constants.SHOOTER_SPEED));
+
+    inButton = new JoystickButton(joystick, 3);
+    inButton.whileHeld(new MoveIntake(Constants.INTAKE_SPEED));
+
+    traButton = new JoystickButton(joystick, 4);
+    traButton.whileHeld(new MoveTransport(Constants.TRANSPORT_SPEED));
+
+    mPulleyButton = new JoystickButton(joystick, 5);
+    sAutoButton = new JoystickButton(joystick, 6);
+
+    mPulleyButton.whileHeld(new MovePulley(Constants.PULLEY_SPEED));
+    sAutoButton.whileHeld(new ShootAuto(Constants.SHOOT_AUTO_SPEED));
+
 
   }
 
@@ -135,4 +189,23 @@ public class RobotContainer {
     return elevEncTwo;
   }
 
+  public Shooter getShooter()
+  {
+    return shooter;
+  }
+
+  public Intake getIntake()
+  {
+    return intake;
+  }
+
+  public Transport getTransport()
+  {
+    return transport;
+  }
+
+  public Pulley getPulley()
+  {
+    return pulley;
+  }
 }

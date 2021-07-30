@@ -18,4 +18,13 @@ public final class Constants
     public static int ELEVATOR_SPEED_DOWN = -2;
     public static int ELEVATOR_ENC_ONE_LIMIT = 1;
     public static int ELEVATOR_ENC_TWO_LIMIT = 1;
+
+    public static double SHOOTER_SPEED = 1.00;
+
+    public static double INTAKE_SPEED = 1.00;
+
+    public static double TRANSPORT_SPEED = 1.00;
+   
+    public static double PULLEY_SPEED = 1.00;
+    public static double SHOOT_AUTO_SPEED = 1.00;
 }
