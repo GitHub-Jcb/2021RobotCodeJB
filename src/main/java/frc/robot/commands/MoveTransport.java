@@ -9,6 +9,7 @@ public class MoveTransport extends CommandBase
     double speed;
     public MoveTransport(double speed)
     {
+        addRequirements(Robot.m_robotContainer.getTransport());
         this.speed = speed;
     }    
 
@@ -27,7 +28,7 @@ public class MoveTransport extends CommandBase
     @Override
     public boolean isFinished()
     {
-        return false;
+        return true;
     }
 
     @Override

@@ -10,6 +10,7 @@ public class MoveElevator extends CommandBase{
 
     public MoveElevator(double speed)
     {
+        addRequirements(Robot.m_robotContainer.getElevator());
         this.speed = speed;
     }
 

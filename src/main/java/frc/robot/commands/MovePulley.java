@@ -8,6 +8,7 @@ public class MovePulley extends CommandBase
     double speed;
     public MovePulley(double speed)
     {
+        addRequirements(Robot.m_robotContainer.getPulley());
         this.speed = speed;
     }    
 
@@ -26,7 +27,7 @@ public class MovePulley extends CommandBase
     @Override
     public boolean isFinished()
     {
-        return false;
+        return true;
     
     }
 

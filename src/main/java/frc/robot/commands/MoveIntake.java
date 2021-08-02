@@ -9,7 +9,8 @@ public class MoveIntake extends CommandBase
 {   
     double speed;
     public MoveIntake(double speed)
-    {
+    {   
+        addRequirements(Robot.m_robotContainer.getIntake());
         this.speed = speed;
     }    
 
@@ -28,7 +29,7 @@ public class MoveIntake extends CommandBase
     @Override
     public boolean isFinished()
     {
-        return false;
+        return true;
     }
 
     @Override

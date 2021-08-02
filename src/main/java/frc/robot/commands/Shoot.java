@@ -8,6 +8,7 @@ public class Shoot extends CommandBase {
     double speed;
     public Shoot(double speed)
     {
+        addRequirements(Robot.m_robotContainer.getShooter());
         this.speed = speed;
     }
 
@@ -26,7 +27,7 @@ public class Shoot extends CommandBase {
     @Override 
     public boolean isFinished()
     {
-        return false;
+        return true;
     }
 
     @Override
